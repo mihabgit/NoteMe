@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/openFragment">
+
+    <fragment
+        android:id="@+id/openFragment"
+        android:name="com.imran.noteme.ui.fragment.OpenFragment"
+        android:label="fragment_open"
+        tools:layout="@layout/fragment_open" />
+    <fragment
+        android:id="@+id/inProgressFragment"
+        android:name="com.imran.noteme.ui.fragment.InProgressFragment"
+        android:label="fragment_in_progress"
+        tools:layout="@layout/fragment_in_progress" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.imran.noteme.ui.fragment.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/doneFragment"
+        android:name="com.imran.noteme.ui.fragment.DoneFragment"
+        android:label="fragment_done"
+        tools:layout="@layout/fragment_done" />
+</navigation>

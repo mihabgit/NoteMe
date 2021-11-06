@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextViewPadding">
+        <item name="android:paddingTop">@dimen/padding_8</item>
+        <item name="android:paddingStart">@dimen/padding_16</item>
+        <item name="android:paddingEnd">@dimen/padding_16</item>-->
+        <item name="android:paddingBottom">@dimen/padding_16</item>
+    </style>
+</resources>
