@@ -3,6 +3,6 @@
 
     <item android:drawable="@color/colorBackground" />
 
-    <item android:drawable="@drawable/ic_icons8_kotlin" android:gravity="center" />
+    <item android:drawable="@drawable/ic_note2" android:gravity="center" />
 
 </layer-list>
