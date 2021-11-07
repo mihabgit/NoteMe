@@ -16,6 +16,16 @@ import java.util.*
 
 class CommonTask {
 
+    fun getDate(milliSeconds: Long, dateFormat: String?): String? {
+        // Create a DateFormatter object for displaying date in specified format.
+        val formatter = SimpleDateFormat(dateFormat)
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliSeconds
+        return formatter.format(calendar.time)
+    }
+
     fun showDatePickerWithMinDate(context: Context?, textInputLayout: TextInputLayout?) {
         val currentDate = Calendar.getInstance()
         val date = Calendar.getInstance()
@@ -31,7 +41,7 @@ class CommonTask {
     }
 
     private fun formatDateTime(date: Calendar, textInputLayout: TextInputLayout?) {
-        val myFormat = "MM/dd/yyyy"
+        val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         val formattedTime = sdf.format(date.time)
         textInputLayout?.editText?.setText(formattedTime)

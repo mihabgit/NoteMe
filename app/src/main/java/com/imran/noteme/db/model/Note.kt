@@ -13,7 +13,7 @@ data class Note(
     var id: Int = 0,
     var title: String = "",
     var description: String = "",
-    var createdAt: Date?,
+    var createdAt: Long?,
     var deadLine: String = "",
     var status: String = "",
 

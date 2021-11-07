@@ -17,4 +17,8 @@
     <string name="phone">Phone</string>
     <string name="url">Url</string>
     <string name="task_detail">Task Details</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="update">Update</string>
+    <string name="success">Success</string>
+    <string name="dialog_title">Task is saved successfully</string>
 </resources>

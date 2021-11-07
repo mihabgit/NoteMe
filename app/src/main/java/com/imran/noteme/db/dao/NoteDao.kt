@@ -1,9 +1,6 @@
 package com.imran.noteme.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.imran.noteme.db.model.Note
 
 @Dao
@@ -17,5 +14,8 @@ interface NoteDao {
 
     @Query("SELECT * FROM note WHERE status = :status")
     suspend fun getTaskByStatus(status: String): List<Note>
+
+    @Delete
+    suspend fun deleteNote(note: Note)
 
 }

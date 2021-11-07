@@ -24,5 +24,6 @@
     <dimen name="margin_8">8dp</dimen>
     <dimen name="height_48">48dp</dimen>
     <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
 
 </resources>

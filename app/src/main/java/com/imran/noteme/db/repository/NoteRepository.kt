@@ -17,4 +17,8 @@ class NoteRepository(private val db: NoteDatabase) {
         return db.noteDao.getTaskByStatus(status)
     }
 
+    suspend fun deleteNote(note: Note) {
+        db.noteDao.deleteNote(note)
+    }
+
 }

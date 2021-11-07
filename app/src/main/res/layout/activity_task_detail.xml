@@ -106,7 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextViewPadding"
-                android:text="Email: abcd@gmail.com"
+                android:visibility="gone"
+                android:text=""
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/text_size_16" />
 
@@ -115,7 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextViewPadding"
-                android:text="Phone: 01234567891"
+                android:visibility="gone"
+                android:text=""
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/text_size_16" />
 
@@ -124,7 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextViewPadding"
-                android:text="URL: www.google.com"
+                android:visibility="gone"
+                android:text=""
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/text_size_16" />
 

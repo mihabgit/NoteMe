@@ -12,6 +12,7 @@ import com.imran.noteme.R
 import com.imran.noteme.db.NoteDatabase
 import com.imran.noteme.db.model.Note
 import com.imran.noteme.db.repository.NoteRepository
+import com.imran.noteme.ui.activity.AddTaskActivity
 import com.imran.noteme.ui.activity.TaskDetailActivity
 import com.imran.noteme.ui.adapter.TaskAdapter
 import com.imran.noteme.util.Constants
@@ -29,7 +30,8 @@ class OpenFragment : Fragment() {
 
     private lateinit var rvOpenTask: RecyclerView
     private var adapter: TaskAdapter? = null
-    private var openTaskList: List<Note>? = null
+    private var noteList: List<Note>? = null
+    private lateinit var noteRepository: NoteRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,24 +44,60 @@ class OpenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        noteRepository = NoteRepository(NoteDatabase(requireActivity()))
         rvOpenTask = view.findViewById(R.id.rvOpenTask)
         rvOpenTask.layoutManager = LinearLayoutManager(requireActivity())
 
-        openTaskList = ArrayList()
-        val noteRepository = NoteRepository(NoteDatabase(requireActivity()))
-        CoroutineScope(Main).launch {
-            openTaskList = noteRepository.getTaskByStatus(Constants.STATUS_OPEN)
-        }.invokeOnCompletion {
-            adapter = TaskAdapter(requireActivity(), openTaskList as ArrayList<Note>)
-            rvOpenTask.adapter = adapter
+        noteList = ArrayList()
+        adapter = TaskAdapter(requireActivity(), noteList as ArrayList<Note>)
 
-            adapter?.setOnItemClickListener(object : TaskAdapter.OnItemClickListener {
-                override fun onItemClickListener(openTask: Note) {
-                    val intent = Intent(requireActivity(), TaskDetailActivity::class.java)
-                    intent.putExtra(Constants.NOTE_DATA, openTask)
-                    startActivity(intent)
-                }
-            })
+        getOpenNoteFromDb()
+        noteItemClick()
+        editOrDeleteClick()
+    }
+
+    private fun getOpenNoteFromDb() {
+        CoroutineScope(Main).launch {
+            noteList = noteRepository.getTaskByStatus(Constants.STATUS_OPEN)
+        }.invokeOnCompletion {
+            adapter?.setNoteList(noteList as ArrayList<Note>)
+            rvOpenTask.adapter = adapter
         }
     }
+
+    private fun noteItemClick() {
+        adapter?.setOnItemClickListener(object : TaskAdapter.OnItemClickListener {
+            override fun onItemClickListener(note: Note) {
+                val intent = Intent(requireActivity(), TaskDetailActivity::class.java)
+                intent.putExtra(Constants.NOTE_DATA, note)
+                startActivity(intent)
+            }
+        })
+    }
+
+    private fun editOrDeleteClick() {
+
+        adapter?.setOnEditClickListener(object : TaskAdapter.OnEditClickListener {
+            override fun onEditClickListener(note: Note) {
+                val intent = Intent(requireActivity(), AddTaskActivity::class.java)
+                intent.putExtra(Constants.NOTE_DATA, note)
+                startActivity(intent)
+            }
+        })
+
+        adapter?.setOnDeleteClickListener(object : TaskAdapter.OnDeleteClickListener {
+            override fun onDeleteClickListener(note: Note) {
+                CoroutineScope(Main).launch {
+                    noteRepository.deleteNote(note)
+                    getOpenNoteFromDb()
+                }
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getOpenNoteFromDb()
+    }
+
 }
